@@ -1,8 +1,7 @@
 import pandas as pd
 import os, datetime, smtplib, ssl
 from email.message import EmailMessage
-from jupyter_dash import JupyterDash
-from dash import dcc, html, dash_table, Input, Output, State
+from dash import Dash, dcc, html, dash_table, Input, Output, State
 from dotenv import load_dotenv
 
 # === Load environment variables for Gmail ===
@@ -10,7 +9,7 @@ load_dotenv()
 
 WORKBOOK_PATH = r"C:/Users/user/OneDrive/Desktop/CENTRAL REGION 1ST FULLY PAID DATA (1).xlsx"
 SHEET_NAME = r"NKHOTAKOTA"
-COLLECTED_FILE = r"C:/Users/user/OneDrive/Desktop/district_dashboards/collected_nkhotakota.csv"
+COLLECTED_FILE = r"collected_nkhotakota.csv"  # store locally in app dir for Koyeb
 DISPLAY_FIELDS = [
     'Farmer Name', 'Contact', 'District', 'Delivery Mode',
     'Delivery Centre', 'Order No', 'Products Code', 'Products Quantity', 'Order Total Price'
@@ -80,7 +79,9 @@ def send_csv_to_email():
         return False
 
 # === App Layout ===
-app = JupyterDash(__name__)
+app = Dash(__name__)
+server = app.server  # required for Gunicorn
+
 app.title = f"LOOKUP - {SHEET_NAME}"
 
 app.layout = html.Div(style={"backgroundColor": "#0B132B", "color": "#F0F0F0",
@@ -129,7 +130,6 @@ app.layout = html.Div(style={"backgroundColor": "#0B132B", "color": "#F0F0F0",
         ),
         html.Div(id="collected-status", style={"marginTop": "8px", "fontWeight": "bold"}),
 
-        # === Confirm Dialog for Undeliver ===
         dcc.ConfirmDialog(
             id="confirm-undeliver",
             message="Are you sure you want to mark this order as UNDELIVERED?"
@@ -227,7 +227,7 @@ def mark_collected(n_clicks, query):
         save_collected(collected)
         msg = "✅ Marked as DELIVERED."
     else:
-        msg = "⚠️ Already marked delivered."
+        msg = ⚠️ Already marked delivered."
     return msg, collected.to_dict("records")
 
 @app.callback(
@@ -273,4 +273,5 @@ def sync_to_email(n):
     return ""
 
 if __name__ == "__main__":
-    app.run_server(mode="inline", debug=True)
+    app.run_server(host="0.0.0.0", port=int(os.environ.get("PORT", 8050)), debug=False)
+
