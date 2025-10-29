@@ -1,0 +1,6 @@
+dash==2.18.2
+jupyter-dash
+pandas
+openpyxl
+python-dotenv
+smtplib
