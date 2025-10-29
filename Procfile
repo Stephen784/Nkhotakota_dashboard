@@ -1,1 +1,1 @@
-web: gunicorn Nkhota:app
+web: gunicorn Nkhota:server
