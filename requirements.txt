@@ -3,4 +3,4 @@ jupyter-dash
 pandas
 openpyxl
 python-dotenv
-
+gunicorn
