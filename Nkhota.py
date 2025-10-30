@@ -227,7 +227,7 @@ def mark_collected(n_clicks, query):
         save_collected(collected)
         msg = "✅ Marked as DELIVERED."
     else:
-        msg = ⚠️ Already marked delivered."
+        msg = "Already marked delivered."
     return msg, collected.to_dict("records")
 
 @app.callback(
