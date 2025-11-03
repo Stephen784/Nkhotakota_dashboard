@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 # === Load environment variables for Gmail ===
 load_dotenv()
 
-WORKBOOK_PATH = r"C:/Users/user/OneDrive/Desktop/CENTRAL REGION 1ST FULLY PAID DATA (1).xlsx"
-SHEET_NAME = r"NKHOTAKOTA"
-COLLECTED_FILE = r"collected_nkhotakota.csv"  # store locally in app dir for Koyeb
+WORKBOOK_PATH = "data/CENTRAL REGION 1ST FULLY PAID DATA (1).xlsx"
+SHEET_NAME = "NKHOTAKOTA"
+COLLECTED_FILE = "collected_nkhotakota.csv"  # stored locally in app dir for Koyeb
 DISPLAY_FIELDS = [
     'Farmer Name', 'Contact', 'District', 'Delivery Mode',
     'Delivery Centre', 'Order No', 'Products Code', 'Products Quantity', 'Order Total Price'
